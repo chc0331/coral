@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Korail Screen Reader</string>
+    <string name="accessibility_service_name">Korail Screen Reader</string>
+    <string name="accessibility_service_description">코레일 화면의 접근성 정보와 좌석 상태를 읽어 표시합니다.</string>
+</resources>

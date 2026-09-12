@@ -1,0 +1,1487 @@
+{
+  "captured_at": "2026-09-12T16:22:20+09:00",
+  "device_serial": "R3CRB092F2D",
+  "node_count": 74,
+  "nodes": [
+    {
+      "index": 0,
+      "parent": null,
+      "depth": 0,
+      "attributes": {
+        "index": "",
+        "text": "",
+        "resource-id": "",
+        "class": "",
+        "package": "",
+        "content-desc": "",
+        "clickable": "",
+        "enabled": "",
+        "checkable": "",
+        "checked": "",
+        "focused": "",
+        "scrollable": "",
+        "bounds": ""
+      }
+    },
+    {
+      "index": 1,
+      "parent": 0,
+      "depth": 1,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.FrameLayout",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 2,
+      "parent": 1,
+      "depth": 2,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.LinearLayout",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 3,
+      "parent": 2,
+      "depth": 3,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.FrameLayout",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 4,
+      "parent": 3,
+      "depth": 4,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "com.korail.talk:id/action_bar_root",
+        "class": "android.widget.LinearLayout",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 5,
+      "parent": 4,
+      "depth": 5,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "android:id/content",
+        "class": "android.widget.FrameLayout",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 6,
+      "parent": 5,
+      "depth": 6,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "androidx.compose.ui.platform.ComposeView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 7,
+      "parent": 6,
+      "depth": 7,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 8,
+      "parent": 7,
+      "depth": 8,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2640]"
+      }
+    },
+    {
+      "index": 9,
+      "parent": 8,
+      "depth": 9,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2496]"
+      }
+    },
+    {
+      "index": 10,
+      "parent": 9,
+      "depth": 10,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,2496]"
+      }
+    },
+    {
+      "index": 11,
+      "parent": 10,
+      "depth": 11,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "true",
+        "bounds": "[0,820][1080,2496]"
+      }
+    },
+    {
+      "index": 12,
+      "parent": 11,
+      "depth": 12,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,832][1068,1180]"
+      }
+    },
+    {
+      "index": 13,
+      "parent": 12,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "true",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,856][1032,1156]"
+      }
+    },
+    {
+      "index": 14,
+      "parent": 11,
+      "depth": 12,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,1216][1068,1564]"
+      }
+    },
+    {
+      "index": 15,
+      "parent": 14,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "true",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,1240][1032,1540]"
+      }
+    },
+    {
+      "index": 16,
+      "parent": 11,
+      "depth": 12,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,1600][1068,1948]"
+      }
+    },
+    {
+      "index": 17,
+      "parent": 16,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "true",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,1624][1032,1924]"
+      }
+    },
+    {
+      "index": 18,
+      "parent": 11,
+      "depth": 12,
+      "attributes": {
+        "index": "3",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,1984][1068,2332]"
+      }
+    },
+    {
+      "index": 19,
+      "parent": 18,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "true",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,2008][1032,2308]"
+      }
+    },
+    {
+      "index": 20,
+      "parent": 11,
+      "depth": 12,
+      "attributes": {
+        "index": "4",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,2368][1068,2496]"
+      }
+    },
+    {
+      "index": 21,
+      "parent": 20,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "true",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,2392][1032,2568]"
+      }
+    },
+    {
+      "index": 22,
+      "parent": 10,
+      "depth": 11,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,0][1080,820]"
+      }
+    },
+    {
+      "index": 23,
+      "parent": 22,
+      "depth": 12,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,94][1080,262]"
+      }
+    },
+    {
+      "index": 24,
+      "parent": 23,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,94][1080,262]"
+      }
+    },
+    {
+      "index": 25,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,94][120,238]"
+      }
+    },
+    {
+      "index": 26,
+      "parent": 25,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[12,94][156,238]"
+      }
+    },
+    {
+      "index": 27,
+      "parent": 26,
+      "depth": 16,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "이전",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,130][120,202]"
+      }
+    },
+    {
+      "index": 28,
+      "parent": 26,
+      "depth": 16,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[48,130][120,202]"
+      }
+    },
+    {
+      "index": 29,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[132,130][659,202]"
+      }
+    },
+    {
+      "index": 30,
+      "parent": 29,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "수서 출발 동대구 도착 ",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[132,130][659,202]"
+      }
+    },
+    {
+      "index": 31,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "3",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[671,94][816,238]"
+      }
+    },
+    {
+      "index": 32,
+      "parent": 31,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "수정",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[671,130][816,202]"
+      }
+    },
+    {
+      "index": 33,
+      "parent": 31,
+      "depth": 15,
+      "attributes": {
+        "index": "1",
+        "text": "수정",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[707,141][780,191]"
+      }
+    },
+    {
+      "index": 34,
+      "parent": 31,
+      "depth": 15,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[671,130][816,202]"
+      }
+    },
+    {
+      "index": 35,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "4",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[816,94][924,238]"
+      }
+    },
+    {
+      "index": 36,
+      "parent": 35,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "새로고침",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[852,130][924,202]"
+      }
+    },
+    {
+      "index": 37,
+      "parent": 35,
+      "depth": 15,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[852,130][924,202]"
+      }
+    },
+    {
+      "index": 38,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "5",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[924,94][1068,238]"
+      }
+    },
+    {
+      "index": 39,
+      "parent": 38,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "장바구니",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[960,130][1032,202]"
+      }
+    },
+    {
+      "index": 40,
+      "parent": 38,
+      "depth": 15,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[960,130][1032,202]"
+      }
+    },
+    {
+      "index": 41,
+      "parent": 24,
+      "depth": 14,
+      "attributes": {
+        "index": "6",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[132,208][449,262]"
+      }
+    },
+    {
+      "index": 42,
+      "parent": 41,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "인원1명 일반 좌석",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[132,208][449,262]"
+      }
+    },
+    {
+      "index": 43,
+      "parent": 22,
+      "depth": 12,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,262][1080,820]"
+      }
+    },
+    {
+      "index": 44,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[60,262][1020,478]"
+      }
+    },
+    {
+      "index": 45,
+      "parent": 44,
+      "depth": 14,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[60,310][1020,430]"
+      }
+    },
+    {
+      "index": 46,
+      "parent": 45,
+      "depth": 15,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[42,298][171,442]"
+      }
+    },
+    {
+      "index": 47,
+      "parent": 46,
+      "depth": 16,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "이전날",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[78,334][150,406]"
+      }
+    },
+    {
+      "index": 48,
+      "parent": 46,
+      "depth": 16,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[60,310][168,430]"
+      }
+    },
+    {
+      "index": 49,
+      "parent": 45,
+      "depth": 15,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[171,298][894,442]"
+      }
+    },
+    {
+      "index": 50,
+      "parent": 49,
+      "depth": 16,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "가는날",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[171,310][909,430]"
+      }
+    },
+    {
+      "index": 51,
+      "parent": 49,
+      "depth": 16,
+      "attributes": {
+        "index": "1",
+        "text": "2026년 9월 25일 (금) 09:00시 이후",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[171,341][863,399]"
+      }
+    },
+    {
+      "index": 52,
+      "parent": 49,
+      "depth": 16,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[171,310][909,430]"
+      }
+    },
+    {
+      "index": 53,
+      "parent": 45,
+      "depth": 15,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[894,298][1038,442]"
+      }
+    },
+    {
+      "index": 54,
+      "parent": 53,
+      "depth": 16,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "다음날",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[930,334][1002,406]"
+      }
+    },
+    {
+      "index": 55,
+      "parent": 53,
+      "depth": 16,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[912,310][1020,430]"
+      }
+    },
+    {
+      "index": 56,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,502][356,646]"
+      }
+    },
+    {
+      "index": 57,
+      "parent": 56,
+      "depth": 14,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "열차 종류",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,514][356,634]"
+      }
+    },
+    {
+      "index": 58,
+      "parent": 56,
+      "depth": 14,
+      "attributes": {
+        "index": "1",
+        "text": "전체 열차",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[60,545][237,603]"
+      }
+    },
+    {
+      "index": 59,
+      "parent": 56,
+      "depth": 14,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,514][356,634]"
+      }
+    },
+    {
+      "index": 60,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[380,502][700,646]"
+      }
+    },
+    {
+      "index": 61,
+      "parent": 60,
+      "depth": 14,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "환승 여부",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[380,514][700,634]"
+      }
+    },
+    {
+      "index": 62,
+      "parent": 60,
+      "depth": 14,
+      "attributes": {
+        "index": "1",
+        "text": "직통",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[404,545][487,603]"
+      }
+    },
+    {
+      "index": 63,
+      "parent": 60,
+      "depth": 14,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[380,514][700,634]"
+      }
+    },
+    {
+      "index": 64,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "3",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[724,502][1044,646]"
+      }
+    },
+    {
+      "index": 65,
+      "parent": 64,
+      "depth": 14,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "조회옵션",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[724,514][1044,634]"
+      }
+    },
+    {
+      "index": 66,
+      "parent": 64,
+      "depth": 14,
+      "attributes": {
+        "index": "1",
+        "text": "조회옵션",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[748,545][912,603]"
+      }
+    },
+    {
+      "index": 67,
+      "parent": 64,
+      "depth": 14,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[724,514][1044,634]"
+      }
+    },
+    {
+      "index": 68,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "4",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "true",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,670][363,814]"
+      }
+    },
+    {
+      "index": 69,
+      "parent": 68,
+      "depth": 14,
+      "attributes": {
+        "index": "0",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "정렬",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,706][363,778]"
+      }
+    },
+    {
+      "index": 70,
+      "parent": 68,
+      "depth": 14,
+      "attributes": {
+        "index": "1",
+        "text": "출발 빠른 순",
+        "resource-id": "",
+        "class": "android.widget.TextView",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[120,713][351,771]"
+      }
+    },
+    {
+      "index": 71,
+      "parent": 68,
+      "depth": 14,
+      "attributes": {
+        "index": "2",
+        "text": "",
+        "resource-id": "",
+        "class": "android.widget.Button",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[36,706][363,778]"
+      }
+    },
+    {
+      "index": 72,
+      "parent": 43,
+      "depth": 13,
+      "attributes": {
+        "index": "5",
+        "text": "",
+        "resource-id": "",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "일반실 운임 특 ∙ 우등실 운임+요금",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[363,715][1044,769]"
+      }
+    },
+    {
+      "index": 73,
+      "parent": 1,
+      "depth": 2,
+      "attributes": {
+        "index": "1",
+        "text": "",
+        "resource-id": "android:id/navigationBarBackground",
+        "class": "android.view.View",
+        "package": "com.korail.talk",
+        "content-desc": "",
+        "clickable": "false",
+        "enabled": "true",
+        "checkable": "false",
+        "checked": "false",
+        "focused": "false",
+        "scrollable": "false",
+        "bounds": "[0,2496][1080,2640]"
+      }
+    }
+  ]
+}
