@@ -93,3 +93,32 @@ object ReservationActionButtonFinder {
         }
     }
 }
+
+object WaitlistCheckboxFinder {
+    private const val LABEL_GAP_PX = 16
+    private const val MIN_TAP_WIDTH_PX = 96
+    private const val MIN_VERTICAL_RADIUS_PX = 48
+
+    /**
+     * Korail's Compose checkbox often has no readable accessibility label. The visual checkbox is
+     * immediately left of its OCR label, so return a compact tap area centered on that checkbox.
+     */
+    fun find(label: String, lines: List<OcrLine>): ScreenBounds? {
+        val labelLine = lines.firstOrNull { line ->
+            line.text.filterNot(Char::isWhitespace).contains(label.filterNot(Char::isWhitespace))
+        } ?: return null
+
+        val right = labelLine.bounds.left - LABEL_GAP_PX
+        val width = max(MIN_TAP_WIDTH_PX, labelLine.bounds.height * 2)
+        val left = (right - width).coerceAtLeast(0)
+        if (right <= left) return null
+
+        val verticalRadius = max(MIN_VERTICAL_RADIUS_PX, labelLine.bounds.height)
+        return ScreenBounds(
+            left = left,
+            top = (labelLine.bounds.centerY - verticalRadius).toInt().coerceAtLeast(0),
+            right = right,
+            bottom = (labelLine.bounds.centerY + verticalRadius).toInt(),
+        )
+    }
+}

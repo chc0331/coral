@@ -2,6 +2,7 @@ package com.korailauto.reader
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class SeatAvailabilityParserTest {
@@ -62,6 +63,22 @@ class SeatAvailabilityParserTest {
 
         assertEquals(SeatStatus.WAITLIST, item.generalStatus)
         assertEquals(ReservationAction.WAITLIST, choice?.action)
+    }
+
+    @Test
+    fun `parses seat states exposed by accessibility node text`() {
+        val bounds = ScreenBounds(48, 856, 1032, 1156)
+        val item = SeatAvailabilityParser.parse(
+            listOf(bounds),
+            listOf(
+                OcrLine("일반실 매진", bounds),
+                OcrLine("특실 예약 대기", bounds),
+            ),
+        ).single()
+
+        assertEquals(SeatStatus.SOLD_OUT, item.generalStatus)
+        assertEquals(SeatStatus.WAITLIST, item.specialStatus)
+        assertEquals(ReservationAction.WAITLIST, SeatAvailabilityParser.firstActionable(listOf(item))?.action)
     }
 
     @Test
@@ -127,4 +144,20 @@ class SeatAvailabilityParserTest {
             ),
         )
     }
+
+    @Test
+    fun `finds a checkbox tap area to the left of an OCR waitlist label`() {
+        val labelBounds = ScreenBounds(180, 240, 580, 300)
+
+        val target = WaitlistCheckboxFinder.find(
+            "개인정보수집및이용동의",
+            listOf(OcrLine("개인정보 수집 및 이용 동의", labelBounds)),
+        )
+
+        assertEquals(104f, target?.centerX)
+        assertEquals(270f, target?.centerY)
+        assertEquals(164, target?.right)
+        assertTrue(target?.right ?: Int.MAX_VALUE < labelBounds.left)
+    }
+
 }

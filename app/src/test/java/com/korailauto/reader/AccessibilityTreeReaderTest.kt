@@ -2,6 +2,7 @@ package com.korailauto.reader
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class AccessibilityTreeReaderTest {
@@ -28,6 +29,20 @@ class AccessibilityTreeReaderTest {
 
         assertEquals(checkBoxBounds, target?.bounds)
         assertFalse(target?.checked ?: true)
+    }
+
+    @Test
+    fun `recognizes a waitlist usage notice before the application dialog`() {
+        val nodes = listOf(
+            node(index = 0, bounds = ScreenBounds(48, 900, 1032, 1500), text = "이용 안내"),
+            node(index = 1, bounds = ScreenBounds(540, 1360, 980, 1480), text = "확인", clickable = true),
+        )
+
+        assertTrue(AccessibilityTreeReader.hasWaitlistNotice(nodes))
+        assertEquals(
+            ScreenBounds(540, 1360, 980, 1480),
+            AccessibilityTreeReader.findEnabledClickTarget(nodes, setOf("확인")),
+        )
     }
 
     private fun node(

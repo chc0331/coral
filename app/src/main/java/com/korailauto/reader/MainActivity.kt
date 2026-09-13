@@ -10,15 +10,19 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityManager
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.text.InputType
 import java.text.DateFormat
 import java.util.Date
 
 class MainActivity : Activity() {
     private lateinit var serviceStatusView: TextView
     private lateinit var automationButton: Button
+    private lateinit var discordWebhookInput: EditText
+    private lateinit var discordStatusView: TextView
     private lateinit var contentView: TextView
 
     private val snapshotListener: (ScreenSnapshot) -> Unit = { snapshot ->
@@ -76,6 +80,68 @@ class MainActivity : Activity() {
         }
         container.addView(automationButton, matchWidthParams())
 
+        val discordTitle = TextView(this).apply {
+            text = "Discord 알림"
+            textSize = 16f
+            setPadding(0, dp(16), 0, 0)
+        }
+        container.addView(discordTitle)
+
+        discordWebhookInput = EditText(this).apply {
+            hint = "Discord Incoming Webhook URL"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
+            setSingleLine(true)
+        }
+        container.addView(discordWebhookInput, matchWidthParams())
+
+        val saveDiscordButton = Button(this).apply {
+            text = "Discord 웹훅 저장"
+            setOnClickListener {
+                val saved = try {
+                    DiscordWebhookSettings.save(this@MainActivity, discordWebhookInput.text.toString())
+                } catch (_: Exception) {
+                    false
+                }
+                if (saved) {
+                    discordWebhookInput.setText("")
+                    renderDiscordStatus("Discord 웹훅을 안전하게 저장했습니다.")
+                } else {
+                    renderDiscordStatus("Discord Incoming Webhook URL 형식을 확인하세요.")
+                }
+            }
+        }
+        container.addView(saveDiscordButton, matchWidthParams())
+
+        val testDiscordButton = Button(this).apply {
+            text = "Discord 연결 테스트"
+            setOnClickListener {
+                renderDiscordStatus("Discord 알림을 전송하는 중입니다. 실패 시 최대 3회 재시도합니다.")
+                DiscordNotificationClient.sendTest(this@MainActivity) { delivered ->
+                    renderDiscordStatus(
+                        if (delivered) "Discord 테스트 알림을 전송했습니다."
+                        else "Discord 알림 전송에 실패했습니다. 웹훅 설정과 네트워크를 확인하세요.",
+                    )
+                }
+            }
+        }
+        container.addView(testDiscordButton, matchWidthParams())
+
+        val clearDiscordButton = Button(this).apply {
+            text = "Discord 웹훅 삭제"
+            setOnClickListener {
+                DiscordWebhookSettings.clear(this@MainActivity)
+                discordWebhookInput.setText("")
+                renderDiscordStatus("Discord 웹훅을 삭제했습니다.")
+            }
+        }
+        container.addView(clearDiscordButton, matchWidthParams())
+
+        discordStatusView = TextView(this).apply {
+            textSize = 14f
+            setPadding(0, dp(4), 0, 0)
+        }
+        container.addView(discordStatusView, matchWidthParams())
+
         contentView = TextView(this).apply {
             textSize = 14f
             setTextIsSelectable(true)
@@ -100,7 +166,22 @@ class MainActivity : Activity() {
             "자동화 시작"
         }
 
+        renderDiscordStatus()
+
         contentView.text = formatSnapshot(snapshot)
+    }
+
+    private fun renderDiscordStatus(message: String? = null) {
+        val savedWebhook = try {
+            DiscordWebhookSettings.maskedWebhook(this)
+        } catch (_: Exception) {
+            null
+        }
+        discordStatusView.text = message ?: if (savedWebhook == null) {
+            "Discord 웹훅: 저장되지 않음"
+        } else {
+            "Discord 웹훅: $savedWebhook"
+        }
     }
 
     private fun formatSnapshot(snapshot: ScreenSnapshot): String = buildString {
@@ -137,12 +218,37 @@ class MainActivity : Activity() {
         val namedNodes = snapshot.nodes.filter { node ->
             node.text.isNotBlank() || node.contentDescription.isNotBlank() || node.stateDescription.isNotBlank()
         }
+        val seatStatusNodes = namedNodes.filter { node ->
+            listOf(node.text, node.contentDescription, node.stateDescription, node.hintText, node.paneTitle)
+                .joinToString(" ")
+                .filterNot(Char::isWhitespace)
+                .let { text ->
+                    text.contains("일반실") ||
+                        text.contains("특실") ||
+                        text.contains("매진") ||
+                        text.contains("예약대기") ||
+                        text.contains("예매")
+                }
+        }
+        appendLine()
+        appendLine("좌석 상태 노드")
+        if (seatStatusNodes.isEmpty()) {
+            appendLine("- 좌석 상태 텍스트는 현재 접근성 노드에 노출되지 않았습니다.")
+        } else {
+            seatStatusNodes.take(40).forEach { node ->
+                val label = listOf(node.text, node.contentDescription, node.stateDescription, node.hintText, node.paneTitle)
+                    .filter { it.isNotBlank() }
+                    .joinToString(" · ")
+                appendLine("- $label (${node.className})")
+            }
+        }
         appendLine()
         appendLine("접근성 텍스트")
-        if (namedNodes.isEmpty()) {
+        val otherNamedNodes = namedNodes.filterNot { it in seatStatusNodes }
+        if (otherNamedNodes.isEmpty()) {
             appendLine("- 노드 텍스트가 없습니다. OCR 결과를 사용합니다.")
         } else {
-            namedNodes.take(40).forEach { node ->
+            otherNamedNodes.take(40).forEach { node ->
                 val label = listOf(node.text, node.contentDescription, node.stateDescription)
                     .filter { it.isNotBlank() }
                     .joinToString(" · ")

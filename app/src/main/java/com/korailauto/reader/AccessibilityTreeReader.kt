@@ -114,6 +114,21 @@ object AccessibilityTreeReader {
             node.visible && (compact(node.text).contains(compact(label)) || compact(node.contentDescription).contains(compact(label)))
         }
 
+    fun hasWaitlistNotice(nodes: List<AccessibleNodeSnapshot>): Boolean =
+        nodes.any { node ->
+            if (!node.visible) return@any false
+            val labels = listOf(
+                node.text,
+                node.contentDescription,
+                node.stateDescription,
+                node.hintText,
+                node.paneTitle,
+            ).map(::compact)
+            labels.any { label ->
+                label.contains("이용안내") || label.contains("서대구정차하는열차입니다")
+            }
+        }
+
     fun findEnabledClickTarget(
         nodes: List<AccessibleNodeSnapshot>,
         labels: Set<String>,
