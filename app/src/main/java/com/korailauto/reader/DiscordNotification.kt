@@ -154,6 +154,21 @@ object DiscordMessageFormatter {
         return "코레일 자동화: $result ($completedAt)"
     }
 
+    fun actionStopped(
+        type: ReservationCompletionType,
+        itemLabel: String,
+        stoppedAtMillis: Long,
+    ): String {
+        val stoppedAt = Instant.ofEpochMilli(stoppedAtMillis)
+            .atZone(ZoneId.systemDefault())
+            .format(timeFormatter)
+        val action = when (type) {
+            ReservationCompletionType.BOOKING -> "예매 요청을 보냈습니다"
+            ReservationCompletionType.WAITLIST -> "예약 대기 신청 요청을 보냈습니다"
+        }
+        return "코레일 자동화: $itemLabel 항목에 $action. 최종 완료는 확인되지 않았으며 자동화를 중지했습니다. ($stoppedAt)"
+    }
+
     fun test(): String = "Korail Screen Reader: Discord 알림 연결 테스트"
 }
 
@@ -234,6 +249,16 @@ object DiscordNotificationClient {
         callback: (Boolean) -> Unit,
     ) {
         send(context, DiscordMessageFormatter.completion(type, completedAtMillis), callback)
+    }
+
+    fun sendActionStopped(
+        context: Context,
+        type: ReservationCompletionType,
+        itemLabel: String,
+        stoppedAtMillis: Long,
+        callback: (Boolean) -> Unit,
+    ) {
+        send(context, DiscordMessageFormatter.actionStopped(type, itemLabel, stoppedAtMillis), callback)
     }
 
     fun sendTest(context: Context, callback: (Boolean) -> Unit) {

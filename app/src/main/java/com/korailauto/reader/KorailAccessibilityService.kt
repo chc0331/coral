@@ -822,7 +822,7 @@ class KorailAccessibilityService : AccessibilityService() {
 
         val root = findKorailRoot()
         if (root == null) {
-            failCompletion("코레일 완료 안내를 확인할 수 없어 알림을 보내지 않았습니다.")
+            failCompletion("코레일 완료 안내를 확인할 수 없어 자동화를 중지합니다.")
             return
         }
         val tree = try {
@@ -906,7 +906,7 @@ class KorailAccessibilityService : AccessibilityService() {
     private fun retryCompletionCheck(message: String) {
         completionCheckAttempts += 1
         if (completionCheckAttempts >= MAX_COMPLETION_CHECK_ATTEMPTS) {
-            failCompletion("$message 최종 완료를 확인하지 못해 알림 없이 자동화를 중지했습니다.")
+            failCompletion("$message 최종 완료를 확인하지 못해 자동화를 중지합니다.")
             return
         }
         publishStatus(
@@ -935,10 +935,27 @@ class KorailAccessibilityService : AccessibilityService() {
     }
 
     private fun failCompletion(message: String) {
+        val type = pendingCompletionType
+        val itemLabel = pendingCompletionItemLabel ?: "선택한"
         clearPendingCompletion()
         AutomationSettings.setEnabled(this, false)
         releaseAutomationWakeLock()
-        publishStatus(AutomationState.ERROR, message)
+        if (type == null) {
+            publishStatus(AutomationState.ERROR, message)
+            return
+        }
+
+        publishStatus(AutomationState.SELECTED, "$message 예매 또는 예약 대기 요청 사실을 Discord로 알립니다.")
+        DiscordNotificationClient.sendActionStopped(this, type, itemLabel, System.currentTimeMillis()) { delivered ->
+            if (delivered) {
+                publishStatus(AutomationState.SELECTED, "요청 후 자동화를 중지했고 Discord 알림을 전송했습니다.")
+            } else {
+                publishStatus(
+                    AutomationState.ERROR,
+                    "요청 후 자동화를 중지했지만 Discord 알림 전송에 실패했습니다. 웹훅 설정과 네트워크를 확인하세요.",
+                )
+            }
+        }
     }
 
     private fun failWaitlistFlow(message: String) {
