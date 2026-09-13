@@ -88,7 +88,13 @@ object ReservationActionButtonFinder {
     private fun matches(action: ReservationAction, value: String): Boolean {
         val normalized = value.filterNot(Char::isWhitespace)
         return when (action) {
-            ReservationAction.BOOK -> normalized in setOf("예매", "예매하기", "바로예매", "바로예매하기")
+            ReservationAction.BOOK -> normalized in setOf(
+                "예매",
+                "예매하기",
+                "바로예매",
+                "바로예매하기",
+                "입석+좌석예매",
+            )
             ReservationAction.WAITLIST -> normalized in setOf("예약대기", "예약대기신청", "예약대기신청하기")
         }
     }

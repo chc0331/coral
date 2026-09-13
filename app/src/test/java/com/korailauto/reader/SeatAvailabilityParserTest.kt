@@ -146,6 +146,19 @@ class SeatAvailabilityParserTest {
     }
 
     @Test
+    fun `finds the current 입석 plus 좌석 booking action label`() {
+        val bounds = ScreenBounds(550, 2260, 1030, 2420)
+
+        assertEquals(
+            bounds,
+            ReservationActionButtonFinder.find(
+                ReservationAction.BOOK,
+                listOf(OcrLine("입석+좌석 예매", bounds)),
+            ),
+        )
+    }
+
+    @Test
     fun `finds a checkbox tap area to the left of an OCR waitlist label`() {
         val labelBounds = ScreenBounds(180, 240, 580, 300)
 

@@ -103,7 +103,7 @@ object AccessibilityTreeReader {
         action: ReservationAction,
     ): ScreenBounds? {
         val labels = when (action) {
-            ReservationAction.BOOK -> setOf("예매", "예매하기", "바로예매", "바로예매하기")
+            ReservationAction.BOOK -> setOf("예매", "예매하기", "바로예매", "바로예매하기", "입석+좌석예매")
             ReservationAction.WAITLIST -> setOf("예약대기신청", "예약대기신청하기", "예약대기")
         }
         return findEnabledClickTarget(nodes, labels)
@@ -145,6 +145,30 @@ object AccessibilityTreeReader {
             current = current.parentIndex?.let(nodes::get)
         }
         return null
+    }
+
+    /**
+     * Selecting a Korail train opens a collapsed bottom sheet. Its handle is exposed as a blank,
+     * full-width clickable view near the bottom of the Korail window; expanding it reveals the
+     * reservation action buttons.
+     */
+    fun findCollapsedBottomSheetTarget(nodes: List<AccessibleNodeSnapshot>): ScreenBounds? {
+        val screenWidth = nodes.maxOfOrNull { it.bounds.right } ?: return null
+        val screenBottom = nodes.maxOfOrNull { it.bounds.bottom } ?: return null
+        return nodes.asSequence()
+            .filter { node ->
+                node.visible &&
+                    node.clickable &&
+                    node.enabled &&
+                    !node.checkable &&
+                    node.text.isBlank() &&
+                    node.contentDescription.isBlank() &&
+                    node.bounds.width >= screenWidth * COLLAPSED_SHEET_MIN_WIDTH_RATIO &&
+                    node.bounds.height in COLLAPSED_SHEET_MIN_HEIGHT..COLLAPSED_SHEET_MAX_HEIGHT &&
+                    node.bounds.top >= screenBottom * COLLAPSED_SHEET_MIN_TOP_RATIO
+            }
+            .maxByOrNull { it.bounds.top }
+            ?.bounds
     }
 
     fun findCheckBoxTarget(
@@ -228,4 +252,9 @@ object AccessibilityTreeReader {
             .toList()
 
     private fun compact(value: String): String = value.filterNot(Char::isWhitespace)
+
+    private const val COLLAPSED_SHEET_MIN_WIDTH_RATIO = 0.95f
+    private const val COLLAPSED_SHEET_MIN_TOP_RATIO = 0.8f
+    private const val COLLAPSED_SHEET_MIN_HEIGHT = 64
+    private const val COLLAPSED_SHEET_MAX_HEIGHT = 240
 }

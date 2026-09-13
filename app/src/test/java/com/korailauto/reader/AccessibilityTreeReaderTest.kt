@@ -18,6 +18,20 @@ class AccessibilityTreeReaderTest {
     }
 
     @Test
+    fun `finds the current 입석 plus 좌석 booking button`() {
+        val buttonBounds = ScreenBounds(546, 2328, 1032, 2472)
+        val nodes = listOf(
+            node(index = 0, bounds = buttonBounds, clickable = true),
+            node(index = 1, parentIndex = 0, bounds = buttonBounds, text = "입석+좌석 예매"),
+        )
+
+        assertEquals(
+            buttonBounds,
+            AccessibilityTreeReader.findReservationActionTarget(nodes, ReservationAction.BOOK),
+        )
+    }
+
+    @Test
     fun `finds the unchecked checkbox to the left of its label`() {
         val checkBoxBounds = ScreenBounds(64, 1200, 112, 1248)
         val nodes = listOf(
@@ -43,6 +57,19 @@ class AccessibilityTreeReaderTest {
             ScreenBounds(540, 1360, 980, 1480),
             AccessibilityTreeReader.findEnabledClickTarget(nodes, setOf("확인")),
         )
+    }
+
+    @Test
+    fun `finds the collapsed reservation bottom sheet handle`() {
+        val expandedSheetHandle = ScreenBounds(0, 1728, 1080, 1854)
+        val collapsedSheetHandle = ScreenBounds(0, 2346, 1080, 2472)
+        val nodes = listOf(
+            node(index = 0, bounds = ScreenBounds(0, 0, 1080, 2640)),
+            node(index = 1, bounds = expandedSheetHandle, clickable = true),
+            node(index = 2, bounds = collapsedSheetHandle, clickable = true),
+        )
+
+        assertEquals(collapsedSheetHandle, AccessibilityTreeReader.findCollapsedBottomSheetTarget(nodes))
     }
 
     private fun node(

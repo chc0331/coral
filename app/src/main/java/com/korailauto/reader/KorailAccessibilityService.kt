@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Display
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityWindowInfo
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
@@ -57,6 +58,7 @@ class KorailAccessibilityService : AccessibilityService() {
     private var pendingCompletionType: ReservationCompletionType? = null
     private var pendingCompletionItemLabel: String? = null
     private var completionCheckAttempts = 0
+    private var missingKorailRootAttempts = 0
 
     override fun onServiceConnected() {
         super.onServiceConnected()
@@ -137,6 +139,7 @@ class KorailAccessibilityService : AccessibilityService() {
         pendingCompletionType = null
         pendingCompletionItemLabel = null
         completionCheckAttempts = 0
+        missingKorailRootAttempts = 0
 
         if (!AutomationSettings.isEnabled(this)) {
             pauseAutomation("자동화가 꺼져 있습니다.")
@@ -307,6 +310,14 @@ class KorailAccessibilityService : AccessibilityService() {
                     automationState = automationState,
                     message = "OCR로 리스트 아이템 ${items.size}개를 분석했습니다.",
                 )
+                if (BuildConfig.DEBUG && evaluateAutomation) {
+                    Log.d(
+                        LOG_TAG,
+                        items.joinToString(prefix = "OCR 좌석 상태: ") { item ->
+                            "${item.index}번(일반실=${item.generalStatus}, 특실=${item.specialStatus})"
+                        },
+                    )
+                }
                 ScreenSnapshotStore.publish(updated)
 
                 if (evaluateAutomation) handleAutomationResult(updated)
@@ -358,9 +369,19 @@ class KorailAccessibilityService : AccessibilityService() {
 
         val root = findKorailRoot()
         if (root == null) {
-            pauseAutomation("코레일 화면이 포그라운드에 없습니다.")
+            missingKorailRootAttempts += 1
+            if (missingKorailRootAttempts < MAX_KORAIL_ROOT_MISSES) {
+                publishStatus(
+                    AutomationState.RUNNING,
+                    "코레일 화면을 확인하는 중입니다. 다시 확인합니다. ($missingKorailRootAttempts/$MAX_KORAIL_ROOT_MISSES)",
+                )
+                scheduleNextRefresh()
+            } else {
+                pauseAutomation("코레일 화면이 포그라운드에 없습니다.")
+            }
             return
         }
+        missingKorailRootAttempts = 0
 
         val tree = try {
             AccessibilityTreeReader.read(root)
@@ -396,20 +417,20 @@ class KorailAccessibilityService : AccessibilityService() {
             return
         }
 
-        if (clickAtBounds(choice.item.bounds)) {
-            pendingReservationAction = choice.action
-            pendingItemIndex = choice.item.index
-            actionButtonAttempts = 0
-            pendingRefresh?.let(mainHandler::removeCallbacks)
-            pendingRefresh = null
-            ScreenSnapshotStore.publish(
-                snapshot.copy(
-                    automationState = AutomationState.RUNNING,
-                    message = "${choice.item.index}번째 항목을 선택했습니다. ${actionLabel(choice.action)} 버튼을 찾습니다.",
-                ),
-            )
-            scheduleActionButtonClick()
-        } else {
+        pendingReservationAction = choice.action
+        pendingItemIndex = choice.item.index
+        actionButtonAttempts = 0
+        pendingRefresh?.let(mainHandler::removeCallbacks)
+        pendingRefresh = null
+        ScreenSnapshotStore.publish(
+            snapshot.copy(
+                automationState = AutomationState.RUNNING,
+                message = "${choice.item.index}번째 선택 가능 항목을 직접 터치합니다.",
+            ),
+        )
+
+        if (!tapTrainItem(choice)) {
+            clearPendingAction()
             ScreenSnapshotStore.publish(
                 snapshot.copy(
                     automationState = AutomationState.ERROR,
@@ -462,6 +483,16 @@ class KorailAccessibilityService : AccessibilityService() {
         val actionTarget = AccessibilityTreeReader.findReservationActionTarget(tree.nodes, action)
         if (actionTarget != null && clickAtBounds(actionTarget)) {
             completePendingAction(action)
+            return
+        }
+
+        val collapsedBottomSheet = AccessibilityTreeReader.findCollapsedBottomSheetTarget(tree.nodes)
+        if (collapsedBottomSheet != null && clickAtBounds(collapsedBottomSheet)) {
+            publishStatus(
+                AutomationState.RUNNING,
+                "하단 예매 시트를 펼쳤습니다. ${actionLabel(action)} 버튼을 확인합니다.",
+            )
+            scheduleActionButtonClick()
             return
         }
 
@@ -989,26 +1020,84 @@ class KorailAccessibilityService : AccessibilityService() {
         ReservationAction.WAITLIST -> "예약 대기 신청"
     }
 
-    private fun clickAtBounds(target: ScreenBounds): Boolean {
+    private fun tapTrainItem(choice: TrainReservationChoice): Boolean {
+        if (!isKorailInputWindowActive()) return false
+
+        val target = choice.item.bounds
+        val action = choice.action
+        val itemIndex = choice.item.index
+        val runId = automationRunId
+        val path = Path().apply { moveTo(target.centerX, target.centerY) }
+        val gesture = GestureDescription.Builder()
+            .addStroke(GestureDescription.StrokeDescription(path, 0, TAP_DURATION_MILLIS))
+            .build()
+        val callback = object : GestureResultCallback() {
+            override fun onCompleted(gestureDescription: GestureDescription) {
+                if (!isCurrentRun(runId) || pendingReservationAction != action || pendingItemIndex != itemIndex) return
+
+                publishStatus(
+                    AutomationState.RUNNING,
+                    "${itemIndex}번째 선택 가능 항목을 직접 터치했습니다. ${actionLabel(action)} 버튼을 찾습니다.",
+                )
+                scheduleActionButtonClick()
+            }
+
+            override fun onCancelled(gestureDescription: GestureDescription) {
+                if (!isCurrentRun(runId) || pendingReservationAction != action || pendingItemIndex != itemIndex) return
+
+                if (performNodeClickAtBounds(target)) {
+                    publishStatus(
+                        AutomationState.RUNNING,
+                        "${itemIndex}번째 항목의 직접 터치가 취소되어 접근성 노드로 선택했습니다. ${actionLabel(action)} 버튼을 찾습니다.",
+                    )
+                    scheduleActionButtonClick()
+                } else {
+                    failPendingAction("${itemIndex}번째 선택 가능 항목을 직접 터치하지 못했습니다.")
+                }
+            }
+        }
+
+        if (dispatchGesture(gesture, callback, mainHandler)) return true
+
+        if (performNodeClickAtBounds(target)) {
+            publishStatus(
+                AutomationState.RUNNING,
+                "${itemIndex}번째 항목에 직접 터치를 보낼 수 없어 접근성 노드로 선택했습니다. ${actionLabel(action)} 버튼을 찾습니다.",
+            )
+            scheduleActionButtonClick()
+            return true
+        }
+        return false
+    }
+
+    private fun clickAtBounds(target: ScreenBounds): Boolean =
+        performNodeClickAtBounds(target) || (isKorailInputWindowActive() && dispatchTap(target))
+
+    private fun performNodeClickAtBounds(target: ScreenBounds): Boolean {
         val root = findKorailRoot() ?: return false
 
-        val clickedByNodeAction = try {
+        return try {
             AccessibilityTreeReader.performClickAtBounds(root, target)
         } finally {
             root.recycle()
         }
-        return clickedByNodeAction || (isKorailInputWindowActive() && dispatchTap(target))
     }
 
     /**
-     * TalkBack reads all interactive windows, not only rootInActiveWindow. This matters on
-     * foldables where the system UI can own the focused window while Korail remains visible.
+     * TalkBack reads all interactive windows, not only rootInActiveWindow. On foldables Korail
+     * can be hosted on a display other than the default one, so inspect every display.
      */
     private fun findKorailRoot(): AccessibilityNodeInfo? {
         val activeRoot = rootInActiveWindow
         if (activeRoot?.packageName?.toString() == TARGET_PACKAGE) return activeRoot
         activeRoot?.recycle()
 
+        val windows = allAccessibilityWindows()
+        findKorailRoot(windows.filter { it.isActive || it.isFocused })?.let { return it }
+        return findKorailRoot(windows)
+    }
+
+    private fun findKorailRoot(windows: Iterable<AccessibilityWindowInfo>): AccessibilityNodeInfo? {
         for (window in windows) {
             val root = window.root ?: continue
             if (root.packageName?.toString() == TARGET_PACKAGE) return root
@@ -1018,23 +1107,15 @@ class KorailAccessibilityService : AccessibilityService() {
     }
 
     private fun isKorailInputWindowActive(): Boolean {
-        val activeRoot = rootInActiveWindow
-        if (activeRoot != null) {
-            try {
-                if (activeRoot.packageName?.toString() == TARGET_PACKAGE) return true
-            } finally {
-                activeRoot.recycle()
-            }
-        }
+        val root = findKorailRoot() ?: return false
+        root.recycle()
+        return true
+    }
 
-        return windows.any { window ->
-            if (!window.isActive && !window.isFocused) return@any false
-            val root = window.root ?: return@any false
-            try {
-                root.packageName?.toString() == TARGET_PACKAGE
-            } finally {
-                root.recycle()
-            }
+    private fun allAccessibilityWindows() = buildList {
+        val windowsByDisplay = getWindowsOnAllDisplays()
+        for (index in 0 until windowsByDisplay.size()) {
+            addAll(windowsByDisplay.valueAt(index))
         }
     }
 
@@ -1091,7 +1172,7 @@ class KorailAccessibilityService : AccessibilityService() {
         private const val OCR_MIN_INTERVAL_MILLIS = 1_500L
         private const val MIN_REFRESH_DELAY_MILLIS = 2_000L
         private const val MAX_REFRESH_DELAY_MILLIS = 3_500L
-        private const val RESULT_SETTLE_MILLIS = 1_000L
+        private const val RESULT_SETTLE_MILLIS = 3_000L
         private const val ACTION_BUTTON_SETTLE_MILLIS = 800L
         private const val WAITLIST_STEP_SETTLE_MILLIS = 500L
         private const val COMPLETION_CHECK_DELAY_MILLIS = 500L
@@ -1100,6 +1181,7 @@ class KorailAccessibilityService : AccessibilityService() {
         private const val TAP_DURATION_MILLIS = 50L
         private const val MAX_EVENT_TEXT = 20
         private const val MAX_ACTION_BUTTON_ATTEMPTS = 5
+        private const val MAX_KORAIL_ROOT_MISSES = 3
         private const val MAX_WAITLIST_STEP_ATTEMPTS = 12
         private const val MAX_COMPLETION_CHECK_ATTEMPTS = 12
         private const val STOP_NOTICE_LABEL = "서대구정차하는열차입니다"
